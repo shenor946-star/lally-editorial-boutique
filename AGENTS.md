@@ -28,3 +28,9 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project structure (LALLY BOUTIQUE)
+- Products live only in `src/data/products.ts`; pages read from it, so the owner can add items without touching page code.
+- All RU/AZ copy lives in `src/i18n/translations.ts` (AZ typed against RU so no key is missing); language is held in `LanguageProvider` and saved in localStorage.
+- WhatsApp links are built only via `src/lib/whatsapp.ts` (covered by `src/test/whatsapp.test.ts`); contact details live in `src/config/site.ts`.
+- Custom typography utilities must not start with `text-` (use `type-*`, `hollow-*`): tailwind-merge in `cn()` drops them when combined with text size/color classes.

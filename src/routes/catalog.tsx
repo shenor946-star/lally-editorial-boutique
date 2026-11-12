@@ -17,7 +17,7 @@ type CatalogSearch = { category?: FilterId };
 
 export const Route = createFileRoute("/catalog")({
   validateSearch: (search: Record<string, unknown>): CatalogSearch => {
-    const c = search.category;
+    const c = search["category"];
     return typeof c === "string" && (FILTER_IDS as readonly string[]).includes(c) ? { category: c as FilterId } : {};
   },
   head: () => ({

@@ -22,7 +22,7 @@ export function ProductModal({ product, onClose }: Props) {
 
   useEffect(() => {
     // Pre-select when only one size exists; otherwise the customer chooses.
-    setSize(product && product.sizes.length === 1 ? product.sizes[0] : null);
+    setSize(product && product.sizes.length === 1 ? (product.sizes[0] ?? null) : null);
   }, [product]);
 
   const name = product ? l(product.name) : "";
