@@ -3,13 +3,13 @@ import { ArrowRight, ArrowDown } from "lucide-react";
 import { useEffect, useRef } from "react";
 
 import boutiqueImg from "@/assets/editorial-boutique.webp";
-import silkImg from "@/assets/editorial-silk.webp";
 import suitImg from "@/assets/editorial-suit.webp";
 import heroModel from "@/assets/hero-model.webp";
 import { editorialButton } from "@/components/site/button-styles";
 import { Marquee } from "@/components/site/Marquee";
 import { Parallax } from "@/components/site/Parallax";
 import { Reveal } from "@/components/site/Reveal";
+import { SeasonShowcase } from "@/components/site/SeasonShowcase";
 import { PRODUCTS } from "@/data/products";
 import { useLanguage } from "@/i18n/LanguageProvider";
 import { discountPercent, formatPrice } from "@/lib/pricing";
@@ -144,36 +144,7 @@ function HomePage() {
       <Marquee className="bg-ink py-5 font-display text-4xl text-milk md:py-7 md:text-6xl" />
 
       {/* ---------------- SEASON / INFO ---------------- */}
-      <section id="season" className="mx-auto max-w-[1600px] scroll-mt-20 px-5 py-24 md:px-10 md:py-40">
-        <div className="grid gap-16 md:grid-cols-12 md:gap-10">
-          <div className="md:col-span-5">
-            <Reveal variant="clip">
-              <Parallax speed={0.08} className="aspect-[3/4]" innerClassName="scale-[1.15]">
-                <img src={silkImg} alt="" className="h-full w-full object-cover" />
-              </Parallax>
-            </Reveal>
-          </div>
-          <div className="md:col-span-6 md:col-start-7 md:pt-24">
-            <Reveal>
-              <p className="type-eyebrow text-muted-foreground">LALLY · 2026</p>
-              <h2 className="mt-5 font-serif text-5xl leading-[0.95] md:text-7xl">{t.home.infoTitle}</h2>
-            </Reveal>
-            <ol className="mt-14 border-t border-foreground">
-              {t.home.info.map((item, i) => (
-                <Reveal as="li" key={item.title} delay={i * 90} className="group grid grid-cols-[3.5rem_1fr] gap-4 border-b border-border py-7 md:grid-cols-[5rem_1fr]">
-                  <span className="font-display text-3xl text-silver transition-colors duration-500 group-hover:text-foreground md:text-4xl">
-                    0{i + 1}
-                  </span>
-                  <div>
-                    <h3 className="font-serif text-2xl md:text-3xl">{item.title}</h3>
-                    <p className="mt-2 max-w-md text-sm leading-relaxed text-muted-foreground">{item.text}</p>
-                  </div>
-                </Reveal>
-              ))}
-            </ol>
-          </div>
-        </div>
-      </section>
+      <SeasonShowcase />
 
       {/* ---------------- PROMO / АКЦИИ ---------------- */}
       <section className="bg-ink text-milk">

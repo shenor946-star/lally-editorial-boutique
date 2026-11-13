@@ -15,6 +15,7 @@ const ru = {
     cta: "Открыть каталог",
     scroll: "Листайте",
     infoTitle: "Сезон в деталях",
+    infoCta: "Смотреть в каталоге",
     info: [
       { title: "Новая коллекция", text: "Свежие силуэты сезона — от коктейльных платьев до строгих костюмов." },
       { title: "Специальные предложения", text: "Избранные модели по особым ценам для наших клиенток." },
@@ -126,6 +127,7 @@ const az: Dictionary = {
     cta: "Kataloqa bax",
     scroll: "Aşağı sürüşdürün",
     infoTitle: "Mövsüm detallarda",
+    infoCta: "Kataloqda bax",
     info: [
       { title: "Yeni kolleksiya", text: "Mövsümün yeni siluetləri — kokteyl donlarından klassik kostyumlara qədər." },
       { title: "Xüsusi təkliflər", text: "Müştərilərimiz üçün seçilmiş modellər xüsusi qiymətlərlə." },
