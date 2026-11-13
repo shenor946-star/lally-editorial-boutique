@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 
 import boutiqueImg from "@/assets/editorial-boutique.webp";
 import suitImg from "@/assets/editorial-suit.webp";
+import heroLogo from "@/assets/hero-logo.png.asset.json";
 import heroModel from "@/assets/hero-model.webp";
 import { editorialButton } from "@/components/site/button-styles";
 import { Marquee } from "@/components/site/Marquee";
