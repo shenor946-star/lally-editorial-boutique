@@ -2,6 +2,7 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import { Menu, Phone, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
+import brandLogo from "@/assets/lally-boutique-logo.png";
 import { SITE } from "@/config/site";
 import { useLanguage } from "@/i18n/LanguageProvider";
 import { cn } from "@/lib/utils";
@@ -12,10 +13,11 @@ import { WhatsAppIcon } from "./WhatsAppIcon";
 
 export function Logo({ className }: { className?: string }) {
   return (
-    <span className={cn("flex flex-col leading-none", className)}>
-      <span className="font-display text-2xl font-medium tracking-tight md:text-[1.7rem]">LALLY</span>
-      <span className="mt-0.5 text-[0.5rem] font-semibold tracking-[0.62em]">BOUTIQUE</span>
-    </span>
+    <img
+      src={brandLogo}
+      alt="LALY BOUTIQUE"
+      className={cn("h-12 w-auto object-contain md:h-[3.35rem]", className)}
+    />
   );
 }
 

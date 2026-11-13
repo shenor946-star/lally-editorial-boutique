@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 
+import brandLogo from "@/assets/lally-boutique-logo.png";
 import { SITE } from "@/config/site";
 import { useLanguage } from "@/i18n/LanguageProvider";
 import { whatsappLink } from "@/lib/whatsapp";
@@ -11,8 +12,12 @@ export function Footer() {
       <div className="mx-auto max-w-[1600px] px-5 pb-10 pt-20 md:px-10 md:pt-28">
         <div className="grid gap-14 md:grid-cols-12">
           <div className="md:col-span-6">
-            <p className="type-masthead text-[22vw] md:text-[11vw] lg:text-[9rem]">LALLY</p>
-            <p className="mt-3 text-[0.65rem] font-semibold tracking-[0.9em]">BOUTIQUE</p>
+            <img
+              src={brandLogo}
+              alt="LALY BOUTIQUE"
+              loading="lazy"
+              className="w-[min(78vw,22rem)] object-contain invert"
+            />
             <p className="mt-8 font-serif text-2xl italic text-ink-muted">{t.footer.tagline}</p>
           </div>
           <div className="md:col-span-3">
