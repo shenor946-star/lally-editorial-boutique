@@ -112,7 +112,7 @@ function CatalogPage() {
         ) : (
           <div
             key={category ?? "all"}
-            className="grid grid-cols-2 items-start gap-x-4 gap-y-16 md:grid-cols-3 md:gap-x-10 md:gap-y-28 lg:gap-x-16"
+            className="grid grid-cols-2 items-start gap-x-3 gap-y-14 md:grid-cols-3 md:gap-x-8 md:gap-y-24 lg:gap-x-12"
           >
             {items.map((product, i) => (
               <Fragment key={product.sku}>
@@ -147,11 +147,9 @@ function CatalogPage() {
   );
 }
 
-/** Offsets columns so the grid reads like a magazine spread rather than a shop shelf. */
+/** Gently lowers the middle column on desktop so the lookbook grid reads like a spread; phones stay even. */
 function staggerClass(pos: number) {
-  const mobileOffset = pos % 2 === 1;
-  const desktopOffset = pos % 3 === 1;
-  return cn(mobileOffset ? "mt-16" : "mt-0", desktopOffset ? "md:mt-32" : "md:mt-0");
+  return pos % 3 === 1 ? "md:mt-20" : "md:mt-0";
 }
 
 /** Magazine-style spread between product rows. */

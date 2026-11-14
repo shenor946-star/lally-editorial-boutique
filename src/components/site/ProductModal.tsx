@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 
 import { ALL_SIZES, productKind, type Product, type Size } from "@/data/products";
 import { useLanguage } from "@/i18n/LanguageProvider";
+import { saveEnquiry } from "@/lib/enquiries";
 import { discountPercent, formatPrice } from "@/lib/pricing";
 import { cn } from "@/lib/utils";
 import { buildOrderMessage, whatsappLink } from "@/lib/whatsapp";
@@ -43,17 +44,14 @@ export function ProductModal({ product, onClose }: Props) {
           {product && (
             <div className="grid min-h-full md:grid-cols-[1.15fr_1fr]">
               {/* Image */}
-              <div className="relative flex min-h-[62svh] items-center justify-center overflow-hidden bg-secondary px-6 pb-6 pt-16 md:min-h-0 md:p-12">
-                <span
-                  aria-hidden="true"
-                  className="type-masthead pointer-events-none absolute inset-x-0 top-1/2 -translate-y-1/2 select-none text-center text-[38vw] text-background md:text-[16vw]"
-                >
-                  {product.sku.replace(/\D/g, "").slice(-3)}
-                </span>
+              <div className="relative min-h-[68svh] overflow-hidden bg-secondary md:min-h-0">
                 <img
+                  key={product.sku}
                   src={product.image}
                   alt={name}
-                  className="filter-float relative max-h-[56svh] w-auto object-contain animate-fade-up md:max-h-[calc(100svh-9rem)] lg:max-h-[calc(100svh-11rem)]"
+                  width={880}
+                  height={1100}
+                  className="absolute inset-0 h-full w-full animate-fade-up object-cover object-top"
                 />
                 {off > 0 && (
                   <span className="absolute left-5 top-5 bg-ink px-3 py-1.5 type-eyebrow text-milk md:left-8 md:top-8">
@@ -132,6 +130,9 @@ export function ProductModal({ product, onClose }: Props) {
                       href={waHref}
                       target="_blank"
                       rel="noopener noreferrer"
+                      onClick={() =>
+                        saveEnquiry({ sku: product.sku, productName: name, size, price: product.price, lang, source: "modal" })
+                      }
                       className={editorialButton({ size: "lg", className: "w-full" })}
                     >
                       <WhatsAppIcon className="h-4 w-4" />

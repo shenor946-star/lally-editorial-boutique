@@ -174,14 +174,16 @@ function HomePage() {
             return (
               <Reveal key={p.sku} delay={i * 120} className={cn(i === 1 && "md:mt-24", i === 2 && "col-span-2 mx-auto w-1/2 md:col-span-1 md:w-full")}>
                 <Link to="/catalog" search={{ category: p.category }} className="group block">
-                  <span className="relative block aspect-[3/5]">
+                  <span className="relative block aspect-[4/5] overflow-hidden bg-secondary">
                     <img
                       src={p.image}
                       alt={l(p.name)}
+                      width={880}
+                      height={1100}
                       loading="lazy"
-                      className="filter-float h-full w-full object-contain transition-transform duration-[900ms] ease-[var(--ease-soft)] group-hover:scale-[1.06]"
+                      className="h-full w-full object-cover object-top transition-transform duration-[1200ms] ease-[var(--ease-soft)] group-hover:scale-[1.05]"
                     />
-                    <span className="type-masthead absolute -left-1 top-0 text-5xl md:text-7xl">−{off}%</span>
+                    <span className="type-masthead absolute left-3 top-3 bg-ink px-2 pb-1 pt-2 text-3xl text-milk md:left-4 md:top-4 md:text-5xl">−{off}%</span>
                   </span>
                   <span className="mt-5 flex items-baseline justify-between border-t border-foreground pt-3">
                     <span className="font-serif text-xl md:text-2xl">{l(p.name)}</span>
