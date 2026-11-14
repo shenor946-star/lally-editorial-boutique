@@ -81,17 +81,16 @@ function HomePage() {
       {/* ---------------- HERO ---------------- */}
       <section ref={heroRef} className="relative h-[100svh] min-h-[620px] overflow-hidden">
         <div
-          className="absolute inset-x-0 top-[calc(var(--header-h)+3svh)] z-0 flex justify-center"
+          className="absolute inset-x-0 top-[calc(var(--header-h)+2svh)] z-0 flex justify-center px-6"
           style={layer(0.45)}
         >
-          <h1 className="type-masthead flex text-[27vw] md:text-[25vw] 2xl:text-[24rem]" aria-label="LALLY BOUTIQUE">
-            {"LALLY".split("").map((ch, i) => (
-              <span key={i} className="inline-block overflow-hidden pb-[0.04em]" aria-hidden="true">
-                <span className="animate-letter inline-block" style={{ animationDelay: `${150 + i * 90}ms` }}>
-                  {ch}
-                </span>
-              </span>
-            ))}
+          <h1 className="animate-fade-up m-0 [animation-delay:150ms]">
+            <img
+              src={heroLogo.url}
+              alt="LALY BOUTIQUE"
+              fetchPriority="high"
+              className="w-[min(76vw,19rem)] object-contain md:w-[min(31vw,25rem)]"
+            />
           </h1>
         </div>
 
@@ -103,13 +102,6 @@ function HomePage() {
             className="animate-fade h-[74svh] w-auto max-w-none object-contain [animation-delay:500ms] md:h-[88svh]"
           />
         </div>
-
-        <p
-          className="absolute inset-x-0 top-[calc(var(--header-h)+3svh+23vw)] z-20 text-center text-[0.8rem] font-semibold tracking-[1.1em] text-milk mix-blend-difference md:top-[calc(var(--header-h)+3svh+21vw)] md:text-base md:tracking-[1.6em] 2xl:top-[calc(var(--header-h)+3svh+20rem)]"
-          style={layer(0.3)}
-        >
-          <span className="animate-fade-up inline-block [animation-delay:900ms]">BOUTIQUE</span>
-        </p>
 
         {/* Side notes */}
         <p className="absolute left-6 top-1/2 z-20 hidden -translate-y-1/2 -rotate-90 origin-left type-eyebrow text-muted-foreground lg:block">
