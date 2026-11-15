@@ -78,7 +78,7 @@ export function ProductFigure({ product, index, onOpen, className }: Props) {
             target="_blank"
             rel="noopener noreferrer"
             onClick={() =>
-              saveEnquiry({ sku: product.sku, productName: name, size: null, price: product.price, lang, source: "card" })
+              saveEnquiry({ sku: product.sku, productName: name, size: null, color: null, price: product.price, lang, source: "card" })
             }
             className="inline-flex items-center gap-2 type-eyebrow underline-offset-[6px] hover:underline"
           >

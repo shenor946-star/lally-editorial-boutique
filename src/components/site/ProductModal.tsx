@@ -131,7 +131,7 @@ export function ProductModal({ product, onClose }: Props) {
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={() =>
-                        saveEnquiry({ sku: product.sku, productName: name, size, price: product.price, lang, source: "modal" })
+                        saveEnquiry({ sku: product.sku, productName: name, size, color: null, price: product.price, lang, source: "modal" })
                       }
                       className={editorialButton({ size: "lg", className: "w-full" })}
                     >
