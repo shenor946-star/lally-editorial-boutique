@@ -1,0 +1,2 @@
+ALTER TABLE public.product_enquiries ADD COLUMN IF NOT EXISTS color text;
+ALTER TABLE public.product_enquiries ADD CONSTRAINT product_enquiries_color_len CHECK (color IS NULL OR char_length(color) <= 60);

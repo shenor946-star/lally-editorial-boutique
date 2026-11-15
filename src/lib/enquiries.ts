@@ -5,6 +5,7 @@ export type Enquiry = {
   sku: string;
   productName: string;
   size: string | null;
+  color: string | null;
   price: number;
   lang: Lang;
   source: "modal" | "card";
@@ -18,6 +19,7 @@ export function saveEnquiry(e: Enquiry): void {
       sku: e.sku,
       product_name: e.productName,
       size: e.size,
+      color: e.color,
       price: e.price,
       lang: e.lang,
       source: e.source,

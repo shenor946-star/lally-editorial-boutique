@@ -16,6 +16,7 @@ export type Database = {
     Tables: {
       product_enquiries: {
         Row: {
+          color: string | null
           created_at: string
           id: string
           lang: string
@@ -26,6 +27,7 @@ export type Database = {
           source: string
         }
         Insert: {
+          color?: string | null
           created_at?: string
           id?: string
           lang?: string
@@ -36,6 +38,7 @@ export type Database = {
           source?: string
         }
         Update: {
+          color?: string | null
           created_at?: string
           id?: string
           lang?: string
