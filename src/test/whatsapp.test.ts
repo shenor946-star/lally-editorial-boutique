@@ -17,6 +17,23 @@ describe("WhatsApp order messages", () => {
     );
   });
 
+  it("includes the chosen colour and size in both languages", () => {
+    expect(
+      buildOrderMessage({ lang: "ru", kind: "dress", name: "Коктейль Шанель", sku: "LB-001", size: "L", color: "Чёрный" }),
+    ).toBe(
+      'Здравствуйте! Хочу заказать платье "Коктейль Шанель", артикул LB-001, цвет чёрный, размер L. Подскажите, пожалуйста, доступно ли оно для заказа?',
+    );
+    expect(
+      buildOrderMessage({ lang: "az", kind: "dress", name: "Kokteyl Şanel", sku: "LB-001", size: "L", color: "Qara" }),
+    ).toBe(
+      'Salam! "Kokteyl Şanel" donunu sifariş etmək istəyirəm. Artikül: LB-001, rəng: qara, ölçü: L. Zəhmət olmasa, sifariş üçün mövcud olub-olmadığını bildirin.',
+    );
+  });
+
+  it("gives every catalog colour at least one photo", () => {
+    for (const p of PRODUCTS) for (const c of p.colors) expect(c.images.length).toBeGreaterThan(0);
+  });
+
   it("links to the boutique number with the text encoded", () => {
     const url = whatsappLink('Salam! "Kokteyl Şanel" ölçü: L');
     expect(url.startsWith("https://wa.me/994706520292?text=")).toBe(true);

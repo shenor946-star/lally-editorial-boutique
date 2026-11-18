@@ -5,10 +5,10 @@ import silkImg from "@/assets/editorial-silk.webp";
 import { editorialButton } from "@/components/site/button-styles";
 import { Parallax } from "@/components/site/Parallax";
 import { ProductFigure } from "@/components/site/ProductFigure";
-import { ProductModal } from "@/components/site/ProductModal";
+import { ProductModal, type ModalSelection } from "@/components/site/ProductModal";
 import { Reveal } from "@/components/site/Reveal";
 import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
-import { FILTER_IDS, PRODUCTS, filterProducts, type FilterId, type Product } from "@/data/products";
+import { FILTER_IDS, PRODUCTS, filterProducts, type FilterId } from "@/data/products";
 import { useLanguage } from "@/i18n/LanguageProvider";
 import { cn } from "@/lib/utils";
 import { whatsappLink } from "@/lib/whatsapp";
@@ -43,7 +43,7 @@ export const Route = createFileRoute("/catalog")({
 function CatalogPage() {
   const { t } = useLanguage();
   const { category } = Route.useSearch();
-  const [selected, setSelected] = useState<Product | null>(null);
+  const [selected, setSelected] = useState<ModalSelection | null>(null);
   const items = filterProducts(PRODUCTS, category);
 
   const tabs: { id: FilterId | undefined; label: string }[] = [
@@ -118,7 +118,7 @@ function CatalogPage() {
               <Fragment key={product.sku}>
                 {!category && i === 3 && <Interlude />}
                 <Reveal delay={(i % 3) * 110} className={staggerClass(!category && i >= 3 ? i - 3 : i)}>
-                  <ProductFigure product={product} index={i} onOpen={setSelected} />
+                  <ProductFigure product={product} index={i} onOpen={(product, color, photo) => setSelected({ product, color, photo })} />
                 </Reveal>
               </Fragment>
             ))}
@@ -142,7 +142,7 @@ function CatalogPage() {
         </div>
       </section>
 
-      <ProductModal product={selected} onClose={() => setSelected(null)} />
+      <ProductModal selection={selected} onClose={() => setSelected(null)} />
     </div>
   );
 }

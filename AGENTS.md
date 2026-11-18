@@ -34,3 +34,7 @@ use the editor.
 - All RU/AZ copy lives in `src/i18n/translations.ts` (AZ typed against RU so no key is missing); language is held in `LanguageProvider` and saved in localStorage.
 - WhatsApp links are built only via `src/lib/whatsapp.ts` (covered by `src/test/whatsapp.test.ts`); contact details live in `src/config/site.ts`.
 - Custom typography utilities must not start with `text-` (use `type-*`, `hollow-*`): tailwind-merge in `cn()` drops them when combined with text size/color classes.
+
+## Project rules
+- Product photos live in `src/assets/products/<sku>/<colour>-<n>.<ext>` and are picked up by `import.meta.glob` in `src/data/products.ts`, so the owner adds colours/angles by dropping files, no imports.
+- Catalog photo switching uses `CrossfadeImage` (`src/components/site/ProductPhotos.tsx`), which loads only the visible photo and dissolves it over the previous one, to keep the grid light.
