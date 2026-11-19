@@ -1,9 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Fragment, useState } from "react";
+import { useState } from "react";
 
-import silkImg from "@/assets/editorial-silk.webp";
 import { editorialButton } from "@/components/site/button-styles";
-import { Parallax } from "@/components/site/Parallax";
 import { ProductFigure } from "@/components/site/ProductFigure";
 import { ProductModal, type ModalSelection } from "@/components/site/ProductModal";
 import { Reveal } from "@/components/site/Reveal";
@@ -53,20 +51,18 @@ function CatalogPage() {
 
   return (
     <div className="pt-header">
-      {/* Masthead */}
-      <section className="mx-auto max-w-[1600px] px-5 pb-10 pt-10 md:px-10 md:pb-16 md:pt-16">
-        <div className="grid gap-8 md:grid-cols-12 md:items-end">
-          <div className="md:col-span-8">
-            <p className="animate-fade-up type-eyebrow text-muted-foreground">{t.catalog.eyebrow}</p>
-            <h1 className="mt-4 overflow-hidden font-serif text-[23vw] font-medium leading-[0.8] tracking-[-0.03em] md:text-[13vw] 2xl:text-[13rem]">
-              <span className="animate-letter inline-block pb-[0.08em]">{t.catalog.title}</span>
-            </h1>
-          </div>
-          <div className="animate-fade-up md:col-span-4 [animation-delay:300ms]">
-            <p className="max-w-sm text-sm leading-relaxed text-muted-foreground">{t.catalog.intro}</p>
-            <p className="mt-4 type-eyebrow">{t.catalog.count(items.length)}</p>
+      {/* Masthead — kept short so the first product row lands on the opening screen */}
+      <section className="mx-auto max-w-[1600px] px-5 pb-5 pt-5 md:px-10 md:pb-5 md:pt-6">
+        <div className="flex flex-wrap items-end justify-between gap-x-8 gap-y-3">
+          <h1 className="overflow-hidden font-serif text-[13vw] font-medium leading-[0.8] tracking-[-0.03em] md:text-[5.5vw] 2xl:text-[6rem]">
+            <span className="animate-letter inline-block pb-[0.06em]">{t.catalog.title}</span>
+          </h1>
+          <div className="animate-fade-up flex flex-wrap items-center gap-x-8 gap-y-1 [animation-delay:250ms]">
+            <p className="type-eyebrow text-muted-foreground">{t.catalog.eyebrow}</p>
+            <p className="type-eyebrow">{t.catalog.count(items.length)}</p>
           </div>
         </div>
+        <p className="mt-3 max-w-md text-sm leading-relaxed text-muted-foreground">{t.catalog.intro}</p>
       </section>
 
       {/* Category filter */}
@@ -106,21 +102,18 @@ function CatalogPage() {
       </nav>
 
       {/* Products */}
-      <section className="mx-auto max-w-[1600px] px-5 pb-28 pt-14 md:px-10 md:pb-40 md:pt-24">
+      <section className="mx-auto max-w-[1600px] px-5 pb-28 pt-6 md:px-10 md:pb-40 md:pt-6">
         {items.length === 0 ? (
           <p className="py-32 text-center font-serif text-3xl italic text-muted-foreground">{t.catalog.empty}</p>
         ) : (
           <div
             key={category ?? "all"}
-            className="grid grid-cols-2 items-start gap-x-3 gap-y-14 md:grid-cols-3 md:gap-x-8 md:gap-y-24 lg:gap-x-12"
+            className="grid grid-cols-2 items-start gap-x-3 gap-y-14 md:grid-cols-3 md:gap-x-8 md:gap-y-20 lg:gap-x-12"
           >
             {items.map((product, i) => (
-              <Fragment key={product.sku}>
-                {!category && i === 3 && <Interlude />}
-                <Reveal delay={(i % 3) * 110} className={staggerClass(!category && i >= 3 ? i - 3 : i)}>
-                  <ProductFigure product={product} index={i} onOpen={(product, color, photo) => setSelected({ product, color, photo })} />
-                </Reveal>
-              </Fragment>
+              <Reveal key={product.sku} delay={(i % 3) * 110} className={staggerClass(i)}>
+                <ProductFigure product={product} index={i} onOpen={(product, color, photo) => setSelected({ product, color, photo })} />
+              </Reveal>
             ))}
           </div>
         )}
@@ -149,22 +142,5 @@ function CatalogPage() {
 
 /** Gently lowers the middle column on desktop so the lookbook grid reads like a spread; phones stay even. */
 function staggerClass(pos: number) {
-  return pos % 3 === 1 ? "md:mt-20" : "md:mt-0";
-}
-
-/** Magazine-style spread between product rows. */
-function Interlude() {
-  const { t } = useLanguage();
-  return (
-    <div className="col-span-full my-4 grid items-center gap-8 bg-ink text-milk md:my-10 md:grid-cols-2">
-      <Parallax speed={0.1} className="aspect-[4/5] md:aspect-[5/4]" innerClassName="scale-[1.2]">
-        <img src={silkImg} alt="" loading="lazy" className="h-full w-full object-cover" />
-      </Parallax>
-      <Reveal className="px-6 pb-12 md:px-14 md:pb-0">
-        <p className="type-eyebrow text-ink-muted">LALLY · Editorial</p>
-        <p className="mt-6 font-serif text-5xl italic leading-[0.95] md:text-7xl">{t.catalog.interludeTitle}</p>
-        <p className="mt-6 max-w-sm text-sm leading-relaxed text-ink-muted">{t.catalog.interludeText}</p>
-      </Reveal>
-    </div>
-  );
+  return pos % 3 === 1 ? "md:mt-12" : "md:mt-0";
 }
