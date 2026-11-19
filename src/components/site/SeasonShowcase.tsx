@@ -1,80 +1,63 @@
-import { useState, useRef } from "react";
+import { useRef } from "react";
 import { ArrowUpRight } from "lucide-react";
 
-const items = [
-  {
-    id: "01",
-    title: "Новая коллекция",
-    subtitle: "Свежие силуэты сезона — от коктейльных платьев до строгих костюмов.",
-    image: "/src/assets/editorial-silk.webp",
-  },
-  {
-    id: "02",
-    title: "Специальные предложения",
-    subtitle: "Избранные модели по особым ценам для наших клиенток.",
-    image: "/src/assets/editorial-suit.webp",
-  },
-  {
-    id: "03",
-    title: "Сезонные скидки",
-    subtitle: "Скидки на капсулы сезона и модели прошлых коллекций.",
-    image: "/src/assets/editorial-boutique.webp",
-  },
-  {
-    id: "04",
-    title: "Ограниченные предложения",
-    subtitle: "Единичные экземпляры в каждом размере — успейте выбрать свой.",
-    image: "/src/assets/editorial-limited.webp",
-  },
-];
+import limitedImg from "@/assets/season-limited-edition.jpg";
+import newCollectionImg from "@/assets/season-new-collection.jpg";
+import seasonalOffersImg from "@/assets/season-seasonal-offers.jpg";
+import specialOffersImg from "@/assets/season-special-offers.jpg";
+import { useLanguage } from "@/i18n/LanguageProvider";
+
+const images = [newCollectionImg, specialOffersImg, seasonalOffersImg, limitedImg];
 
 export const SeasonShowcase = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const { t } = useLanguage();
 
   return (
-    <section className="py-16 bg-[#FDFBF7]">
-      <div className="container mx-auto px-4 mb-8">
-        <span className="text-xs uppercase tracking-widest text-muted-foreground">Lally · 2026</span>
-        <h2 className="text-3xl md:text-4xl font-serif mt-2">Сезон в деталях</h2>
+    <section id="season" aria-labelledby="season-title" className="bg-background py-16">
+      <div className="container mx-auto mb-8 px-4">
+        <span className="type-eyebrow text-muted-foreground">Lally · 2026</span>
+        <h2 id="season-title" className="mt-2 font-serif text-3xl md:text-4xl">
+          {t.home.infoTitle}
+        </h2>
       </div>
 
-      {/* Горизонтальный скролл контейнер */}
-      <div 
+      <div
         ref={scrollRef}
-        className="flex gap-6 overflow-x-auto px-4 pb-6 snap-x snap-mandatory scrollbar-none [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        aria-label={t.home.infoTitle}
+        className="scrollbar-none flex snap-x snap-mandatory gap-6 overflow-x-auto px-4 pb-6 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
-        {items.map((item) => (
-          <div 
-            key={item.id}
-            className="min-w-[300px] md:min-w-[420px] h-[500px] relative rounded-lg overflow-hidden flex flex-col justify-end p-6 snap-center shrink-0 group cursor-pointer shadow-sm"
+        {t.home.info.map((item, index) => (
+          <article
+            key={item.title}
+            className="group relative flex h-[500px] w-[300px] min-w-[300px] shrink-0 cursor-pointer snap-center flex-col justify-end overflow-hidden rounded-lg p-6 shadow-sm md:w-[420px] md:min-w-[420px]"
           >
-            {/* Фоновое изображение */}
-            <div 
-              className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
-              style={{ backgroundImage: `url(${item.image})` }}
+            <img
+              src={images[index]}
+              alt={item.title}
+              loading="lazy"
+              decoding="async"
+              className="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
             />
-            
-            {/* Затемнение для читаемости текста */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
 
-            {/* Контент карточки */}
-            <div className="relative z-10 text-white flex justify-between items-end">
-              <div>
-                <p className="text-xs uppercase tracking-widest mb-1 opacity-80">Lally · 2026</p>
-                <h3 className="text-2xl font-serif mb-2">{item.title}</h3>
-                <p className="text-sm opacity-90 line-clamp-2">{item.subtitle}</p>
+            <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/30 to-transparent" />
+
+            <div className="relative z-10 flex items-end justify-between gap-4 text-milk">
+              <div className="min-w-0">
+                <p className="type-eyebrow mb-1 opacity-80">Lally · 2026</p>
+                <h3 className="mb-2 font-serif text-2xl">{item.title}</h3>
+                <p className="line-clamp-2 text-sm opacity-90">{item.text}</p>
               </div>
-              <div className="flex items-center gap-2 mb-1">
-                <span className="text-2xl font-light font-serif">{item.id}</span>
+              <div className="mb-1 flex shrink-0 items-center gap-2">
+                <span className="font-serif text-2xl font-light">{String(index + 1).padStart(2, "0")}</span>
                 <span className="text-lg font-light opacity-60">/ 04</span>
               </div>
             </div>
 
-            {/* Кнопка перехода в углу */}
-            <div className="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white z-10 transition-colors group-hover:bg-white group-hover:text-black">
-              <ArrowUpRight className="w-5 h-5" />
+            <div className="absolute right-6 top-6 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-milk/20 text-milk backdrop-blur-md transition-colors group-hover:bg-milk group-hover:text-ink">
+              <ArrowUpRight className="h-5 w-5" aria-hidden="true" />
             </div>
-          </div>
+          </article>
         ))}
       </div>
     </section>
